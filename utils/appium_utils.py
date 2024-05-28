@@ -1,13 +1,16 @@
+import pytest
 from appium import webdriver
+from time import sleep
 
 
-def initialize_appium_driver():
+@pytest.fixture(scope="function")
+def appium_driver():
     desired_caps = {
-        'platformName': 'Android',  # или 'iOS'
-        'platformVersion': 'ваша_версия_платформы',
-        'deviceName': 'Android',
-        'app': 'app/lg-st-2305-1.apk',
+        "platformName": "Android",
+        "deviceName": "Android Emulator",
+        "app": "/app/lg-st-2305-1.apk",
+        "automationName": "UiAutomator2"
     }
-
     driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
-    return driver
+    yield driver
+    driver.quit()

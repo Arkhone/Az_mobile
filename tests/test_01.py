@@ -8,12 +8,12 @@ from time import sleep
 def appium_driver():
     aps = {
         "platformName": "Android",
-        "deviceName": "Android_11",
-        "app": "/app/lg-st-2305-1.apk",
+        "udid": "emulator-5554",
+        "deviceName": "Android SDK build for x86_64",
         "automationName": "UiAutomator2"
     }
     ds = UiAutomator2Options().load_capabilities(aps)
-    driver = webdriver.Remote('http://localhost:4723/wd/hub', options=ds)
+    driver = webdriver.Remote('http://192.168.56.1:4723', options=ds)
     yield driver
     driver.quit()
 
